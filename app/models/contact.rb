@@ -6,6 +6,8 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :phones, length: { is: 3 }
 
+  accepts_nested_attributes_for :phones, :allow_destroy => true
+
   def self.by_letter(letter)
     where("lastname like ?", "%#{letter}%").order(:lastname)
   end

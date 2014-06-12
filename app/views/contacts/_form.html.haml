@@ -1,0 +1,13 @@
+= form_for @contact do |f|
+  %p First Name
+  %p= f.text_field :firstname
+  %p Last Name
+  %p= f.text_field :lastname
+  %p Email
+  %p= f.text_field :email
+  = f.fields_for :phones do |p|
+    - %w(work mobile home).each_with_index do |t, i|
+      %p= t.capitalize << "Phone"
+      %p= p.text_field :phone, name: "contact[phones_attributes][#{i}][phone]"
+      = p.hidden_field :phone_type, value: t, name: "contact[phones_attributes][#{i}][phone_type]"
+  %p= submit_tag "Submit"

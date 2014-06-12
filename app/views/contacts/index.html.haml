@@ -1,0 +1,24 @@
+%h3 Contact List
+%p= link_to "New Contact", new_contact_path
+%p
+  = form_tag "contacts", method: :get do 
+    = text_field_tag :letter
+    = submit_tag "Search"
+
+%table
+  %tr
+    %th First Name
+    %th Last Name
+    %th Email
+    %th Operation
+  - @contacts.each do |contact|
+    %tr
+      %td= contact.firstname
+      %td= contact.lastname
+      %td= contact.email
+      %td
+        = link_to "Show", contact
+        | 
+        = link_to "Edit", edit_contact_path(contact)
+        | 
+        = link_to "Destroy", contact, method: :destroy, confirm: "Are you sure ?"
