@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
 
     if @contact.update_attributes(contact_params)
-      redirect_to action: :show
+      redirect_to @contact
     else
       render action: :edit
     end
@@ -39,7 +39,7 @@ class ContactsController < ApplicationController
     else
 
       @contact.phones.build
-      render action: :edit
+      render action: :new
     end
   end
 
@@ -47,13 +47,16 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @contact.destroy
 
-    redirect_to :index
+    redirect_to action: :index
   end
 
   private
 
   def contact_params
-    params.require(:contact).permit(:firstname, :lastname, :email, :phones_attributes => [:phone, :phone_type])
+    params.require(:contact).permit(:firstname, 
+                                    :lastname, 
+                                    :email, 
+                                    :phones_attributes => [:phone, :phone_type])
   end
 
 end
