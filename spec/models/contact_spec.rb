@@ -56,4 +56,11 @@ describe Contact do
     expect(build(:contact).phones.size).to eq 3
   end
 
+  describe "Contact.to_csv" do 
+    it "returns comma separated values" do
+      create :contact, firstname: "Nick", lastname: "Robin", email: "1@1.com"
+      expect(Contact.to_csv).to match /Nick,Robin,1@1.com/
+    end
+  end
+
 end

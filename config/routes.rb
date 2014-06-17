@@ -54,7 +54,8 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :contacts
-
+  resources :contacts do
+    resources :phones
+  end
 
 end

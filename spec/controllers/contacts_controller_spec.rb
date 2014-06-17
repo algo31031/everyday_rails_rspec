@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe ContactsController, :type => :controller do
 
-  describe "GET # index" do 
+  describe "GET # index" do
+    before :each do 
+      @raven = create :contact, lastname: "Raven"
+      @bane = create :contact, lastname: "Bane"
+    end
 
     context "传递了letter参数" do
       it "返回一个lastname以letter参数的值为开头的数组" do
-        raven = create :contact, lastname: "Raven"
-        bane = create :contact, lastname: "Bane"
         get :index, letter: "R"
-        expect(assigns(:contacts)).to match_array([raven])
+        expect(assigns(:contacts)).to match_array([@raven])
       end
 
       it "渲染index模板" do
@@ -20,10 +22,8 @@ RSpec.describe ContactsController, :type => :controller do
 
     context "没传递letter参数" do
       it "返回全部contacts赋值给@contacts" do
-        raven = create :contact, lastname: "Raven"
-        bane = create :contact, lastname: "Bane"
         get :index
-        expect(assigns(:contacts)).to eq [raven, bane]
+        expect(assigns(:contacts)).to eq [@bane, @raven]
       end
 
       it "渲染index模板" do 

@@ -1,9 +1,9 @@
 class CreatePhones < ActiveRecord::Migration
   def change
     create_table :phones do |t|
-      t.string :phone_type
+      t.references :contact, index: true
       t.string :phone
-      t.integer :contact_id
+      t.string :phone_type
 
       t.timestamps
     end
