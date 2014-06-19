@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContactsController, :type => :controller do
 
-  shared_examples "可公开访问的contact actions" do 
+  shared_examples "能访问可公开访问的contact actions" do 
 
     describe "GET # index" do
       before :each do 
@@ -52,7 +52,7 @@ RSpec.describe ContactsController, :type => :controller do
 
   end
 
-  shared_examples "需要登录过才可访问的contacts actions" do
+  shared_examples "能访问需要登录过才可访问的contacts actions" do
 
     describe "GET # new" do
       it "新建一个Contact实例赋值给@contact" do
@@ -96,7 +96,7 @@ RSpec.describe ContactsController, :type => :controller do
           expect {
             post :create,
                   contact: attributes_for(:invalid_contact, phones_attributes: @phones)
-          }.to change(Contact, :count).by(0)
+          }.to_not change(Contact, :count)
         end
 
         it "重新渲染new模板" do 
@@ -187,7 +187,7 @@ RSpec.describe ContactsController, :type => :controller do
 
   describe "访客访问" do
 
-    it_behaves_like "可公开访问的contact actions"
+    it_behaves_like "能访问可公开访问的contact actions"
 
     describe "GET # new  拒绝访问" do
       it "需要登录" do
@@ -232,9 +232,9 @@ RSpec.describe ContactsController, :type => :controller do
       set_user_session create(:user)
     end
     
-    it_behaves_like "可公开访问的contact actions"
+    it_behaves_like "能访问可公开访问的contact actions"
 
-    it_behaves_like "需要登录过才可访问的contacts actions"
+    it_behaves_like "能访问需要登录过才可访问的contacts actions"
 
   end
 
@@ -244,9 +244,9 @@ RSpec.describe ContactsController, :type => :controller do
       set_user_session create(:admin)
     end
     
-    it_behaves_like "可公开访问的contact actions"
+    it_behaves_like "能访问可公开访问的contact actions"
 
-    it_behaves_like "需要登录过才可访问的contacts actions"
+    it_behaves_like "能访问需要登录过才可访问的contacts actions"
 
   end
 

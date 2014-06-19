@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe Phone do 
 
   it "does not allow duplicate phone numbers per contact" do

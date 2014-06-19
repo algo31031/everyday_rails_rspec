@@ -46,6 +46,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "spring-commands-rspec"
   gem "spring-commands-cucumber"   
+  gem "guard-rspec"
 end
 
 group :test do
@@ -54,7 +55,8 @@ group :test do
   gem "database_cleaner"
   gem "launchy"
   gem "selenium-webdriver"
-  gem "capybara-webkit"  
+  gem "capybara-webkit"
+  gem 'email_spec'  
 end
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

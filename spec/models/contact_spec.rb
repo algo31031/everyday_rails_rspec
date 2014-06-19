@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe Contact do 
   
   it "is valid with a firstname, a lastname and a email" do 
